@@ -1,0 +1,13 @@
+@import '../../../../../assets/scss/media.scss';
+
+.questions{
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  @include respond-below(lg) {
+    align-items: center;
+    flex-direction: column;
+  }
+}

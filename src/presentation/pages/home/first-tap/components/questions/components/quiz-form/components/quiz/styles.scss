@@ -1,0 +1,28 @@
+@import '../../../../../../../../../assets/scss/media.scss';
+.quiz {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+
+  &__text {
+    max-width: 400px;
+    width: 100%;
+    @include respond-below(md) {
+      max-width: 350px;
+    }
+
+    @include respond-below(sm) {
+      max-width: 295px;
+      font-size: 10px !important;
+    }
+  }
+
+  &__slider{
+    width: 100px;
+
+    @include respond-below(sm) {
+      width: 90px;
+    }
+  }
+}

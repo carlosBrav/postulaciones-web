@@ -1,0 +1,13 @@
+.upload-file-description {
+  &__files {
+    display: flex;
+    span {
+      display: inline-block;
+      margin-right: 10px;
+    }
+  }
+
+  &__delete{
+    cursor: pointer;
+  }
+}

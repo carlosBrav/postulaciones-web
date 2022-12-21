@@ -1,0 +1,1 @@
+export const quantityQuestionsPerPage: number = 20

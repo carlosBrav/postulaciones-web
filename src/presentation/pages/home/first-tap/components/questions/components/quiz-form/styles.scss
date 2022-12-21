@@ -1,0 +1,26 @@
+@import '../../../../../../../assets/scss/media.scss';
+
+.quiz-form{
+  &__container{
+    width: 580px;
+    height: auto;
+    border: 1px solid #d7d7d7;
+    border-radius: 30px;
+    padding: 30px;
+    margin-bottom: 20px;
+
+    @include respond-below(lg) {
+      width: 60%;
+    }
+
+    @include respond-below(md) {
+      width: 90%;
+    }
+
+    @include respond-below(sm) {
+      width: 95%;
+    }
+  }
+
+  
+}

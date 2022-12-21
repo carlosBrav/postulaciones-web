@@ -1,0 +1,7 @@
+@import '../../assets/scss/media.scss';
+
+.text-common {
+  @include respond-below(sm) {
+    font-size: 14px !important;
+  }
+}
