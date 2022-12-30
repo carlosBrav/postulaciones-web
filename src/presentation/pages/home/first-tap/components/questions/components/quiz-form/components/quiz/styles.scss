@@ -9,11 +9,11 @@
     max-width: 400px;
     width: 100%;
     @include respond-below(md) {
-      max-width: 350px;
+      max-width: 400px;
     }
 
     @include respond-below(sm) {
-      max-width: 295px;
+      max-width: 220px;
       font-size: 10px !important;
     }
   }

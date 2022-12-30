@@ -7,9 +7,9 @@ import { validationFormLogin } from '@presentation/pages/login/hooks/use-validat
 import InputTextComponent from '@presentation/components/input-text'
 import ButtonComponent from '@presentation/components/button'
 import { useNavigate } from 'react-router-dom'
-import './styles.scss'
 import { PostulacionesContext } from '../context/postulaciones-context'
-import {tileLogin} from '@presentation/constants'
+import { tileLogin } from '@presentation/constants'
+import TextCommon from '@presentation/components/text-common'
 
 const type_documents = [
   { value: '0001', label: 'CARNET DE EXTRANJERIA' },
@@ -31,95 +31,79 @@ function Login() {
       document_number: '',
     },
   })
-  const {setTitle} = useContext(PostulacionesContext)
+  const { setTitle } = useContext(PostulacionesContext)
 
   const onSubmit = (data: any) => {
     console.log('data ', data)
     navigate('/evaluacion/home')
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     setTitle(tileLogin)
-  },[])
+  }, [])
 
   return (
-    <Box padding="20px" maxWidth="400px" width="100%">
-      <form style={{ flex: '1' }} onSubmit={handleSubmit(onSubmit)}>
-        <Box marginBottom="30px">
-          <SelectComponent
-            name="document_type"
-            control={control}
-            data={type_documents}
-            idLabel="type_document_label"
-            idSelect="type_document_select"
-            label="Tipo de documento"
-          />
-        </Box>
-        <Box marginBottom="30px">
-          <InputTextComponent
-            label="Documento"
-            name="document_number"
-            control={control}
-            id="number_document"
-            type="text"
-          />
-        </Box>
+    <Box width="100%" height="100%" display="flex" flexDirection="column">
+      <Box
+        width="100%"
+        display="flex"
+        flexDirection="row"
+        justifyContent="flex-start"
+        alignItems="center"
+        paddingLeft="20px"
+        paddingBottom="15px"
+        paddingTop="15px"
+        style={{ backgroundColor: '#572364' }}
+      >
+        <TextCommon fontSize="20px" text={tileLogin} type="secondary" />
+      </Box>
+      <Box
+        width="100%"
+        height="100%"
+        display="flex"
+        flexDirection="column"
+        justifyContent="center"
+        alignItems="center"
+      >
         <Box
           width="100%"
-          display="flex"
-          flexDirection="column"
-          alignItems="center"
+          padding="20px"
+          maxWidth="400px"
         >
-          <Box width="150px">
-            <ButtonComponent title={'Ingresar'} type="submit" />
-          </Box>
+          <form style={{ flex: '1' }} onSubmit={handleSubmit(onSubmit)}>
+            <Box marginBottom="30px">
+              <SelectComponent
+                name="document_type"
+                control={control}
+                data={type_documents}
+                idLabel="type_document_label"
+                idSelect="type_document_select"
+                label="Tipo de documento"
+              />
+            </Box>
+            <Box marginBottom="30px">
+              <InputTextComponent
+                label="Documento"
+                name="document_number"
+                control={control}
+                id="number_document"
+                type="text"
+              />
+            </Box>
+            <Box
+              width="100%"
+              display="flex"
+              flexDirection="column"
+              alignItems="center"
+            >
+              <Box width="150px">
+                <ButtonComponent title={'Ingresar'} type="submit" />
+              </Box>
+            </Box>
+          </form>
         </Box>
-      </form>
+      </Box>
     </Box>
-    // <Box width="100%" minHeight="100vh" display="flex" flexDirection="column">
-    //   <Box width="100%" height="60px" style={{ backgroundColor: '#572364' }}>
-    //     <TextCommon
-    //       fontSize="20px"
-    //       text="Ingresa tu DNI o CI (Carnet de extranjería)"
-    //       type="secondary"
-    //     />
-    //   </Box>
-    //   <Box className="login-body">
-    //     <Box padding="20px" maxWidth="400px" width="100%">
-    //       <form style={{ flex: '1' }} onSubmit={handleSubmit(onSubmit)}>
-    //         <Box marginBottom="30px">
-    //           <SelectComponent
-    //             name="document_type"
-    //             control={control}
-    //             data={type_documents}
-    //             idLabel="type_document_label"
-    //             idSelect="type_document_select"
-    //             label="Tipo de documento"
-    //           />
-    //         </Box>
-    //         <Box marginBottom="30px">
-    //           <InputTextComponent
-    //             label="Documento"
-    //             name="document_number"
-    //             control={control}
-    //             id="number_document"
-    //             type="text"
-    //           />
-    //         </Box>
-    //         <Box
-    //           width="100%"
-    //           display="flex"
-    //           flexDirection="column"
-    //           alignItems="center"
-    //         >
-    //           <Box width="150px">
-    //             <ButtonComponent title={'Ingresar'} type="submit" />
-    //           </Box>
-    //         </Box>
-    //       </form>
-    //     </Box>
-    //   </Box>
-    // </Box>
   )
 }
 

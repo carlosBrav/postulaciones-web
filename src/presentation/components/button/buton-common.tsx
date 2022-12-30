@@ -13,15 +13,22 @@ const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
 type Props = {
   title: string
   onClick: () => void
-  type: 'button'|'submit'
+  type: 'button' | 'submit'
+  disabled?: boolean
 }
 
-function ButtonCustom({ title, type, onClick }: Props) {
+function ButtonCustom({ title, type, onClick, disabled = false }: Props) {
   return (
-    <ColorButton type={type} fullWidth variant="contained" onClick={onClick}>
+    <ColorButton
+      disabled={disabled}
+      type={type}
+      fullWidth
+      variant="contained"
+      onClick={onClick}
+    >
       {title}
     </ColorButton>
   )
 }
 
-export{ButtonCustom}
+export { ButtonCustom }

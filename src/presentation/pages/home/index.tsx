@@ -7,7 +7,8 @@ import { SecondTap } from '@presentation/pages/home/second-tap'
 import { PostulacionesContext } from '../context/postulaciones-context'
 import { ButtonCustom } from '@presentation/components/button/buton-common'
 import { useHandleQuantityQuestions } from '@presentation/pages/home/first-tap/hooks/use-handle-quantity-questions'
-import {titleHome} from '@presentation/constants'
+import { titleHome } from '@presentation/constants'
+import useGenerateResponse from '@presentation/pages/home/first-tap/hooks/use-generate-response'
 
 const questions = [
   { id: 1, title: 'Me1 esmero en buscar cosas que necesitan hacerse.' },
@@ -47,17 +48,26 @@ const questions = [
 ]
 
 function Home() {
-  const { step, addStep, setTitle } = useContext(PostulacionesContext)
+  const { step, addStep, setTitle, setResponse, file } =
+    useContext(PostulacionesContext)
   const { getQuantitys, isFinishStepsQuestions, stepsActual } =
     useHandleQuantityQuestions()
+
+  const { transformToResponseType } = useGenerateResponse()
 
   useEffect(() => {
     getQuantitys(questions.length)
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     setTitle(titleHome)
-  },[])
+  }, [])
+
+  useEffect(() => {
+    if (questions.length > 0) {
+      setResponse(transformToResponseType(questions))
+    }
+  }, [questions])
 
   const handleSteps = () => {
     if (isFinishStepsQuestions()) {
@@ -66,36 +76,26 @@ function Home() {
   }
 
   return (
-    <Box
-      width="100%"
-      display="flex"
-      flexDirection="row"
-      alignItems="flex-start"
-      justifyContent="center"
-      padding="10px"
-      height="100%"
-    >
-      <Box maxWidth="1350px" width="100%">
-        <TapHeader selected={step} />
-        {step === 1 && stepsActual === 0 && <TextContent />}
-        {step === 1 && stepsActual > 0 && (
-          <Questions questions={questions} step={stepsActual} />
-        )}
-        {step === 2 && <SecondTap />}
-        <Box
-          width="100%"
-          display="flex"
-          flexDirection="row"
-          justifyContent="flex-end"
-          marginTop="30px"
-        >
-          <Box width="150px">
-            <ButtonCustom
-              title="Continuar"
-              type="button"
-              onClick={handleSteps}
-            />
-          </Box>
+    <Box width="100%">
+      <TapHeader selected={step} />
+      {step === 1 && stepsActual === 0 && <TextContent />}
+      {step === 1 && stepsActual > 0 && (
+        <Questions questions={questions} step={stepsActual} />
+      )}
+      {step === 2 && <SecondTap />}
+      <Box
+        width="100%"
+        display="flex"
+        flexDirection="row"
+        justifyContent="flex-end"
+        marginTop="30px"
+      >
+        <Box width="150px">
+          <ButtonCustom 
+          disabled={(step === 2 && file === null)}
+          title="Continuar" 
+          type="button" 
+          onClick={handleSteps} />
         </Box>
       </Box>
     </Box>

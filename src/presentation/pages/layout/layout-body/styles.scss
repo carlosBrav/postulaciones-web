@@ -1,8 +1,34 @@
-.layout-body {
+@import '../../../assets/scss/media.scss';
+
+.layout {
   width: 100%;
-  height: calc(100vh - 60px);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 90%;
+
+  @include respond-below(sm) {
+    height: auto;
+  }
+  
+
+  &__body {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 30px 10px 10px 10px;
+  }
+
+  &__content {
+    max-width: 1350px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 }

@@ -9,8 +9,9 @@ function LayoutHeader() {
   return (
     <Box
       width="100%"
-      height="60px"
       paddingLeft="20px"
+      paddingTop="15px"
+      paddingBottom="15px"
       style={{ backgroundColor: '#572364' }}
       display="flex"
       flexDirection="row"

@@ -18,7 +18,8 @@
     }
 
     @include respond-below(sm) {
-      width: 95%;
+      width: 100%;
+      padding: 15px;
     }
   }
 
