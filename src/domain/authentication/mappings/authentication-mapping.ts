@@ -6,7 +6,7 @@ import {
   InvalidCredentialsError,
   UnexpectedError
 } from '@domain/authentication/errors'
-import { User } from '../models'
+import { ParticipanteResponse, User } from '../models'
 
 export class AuthenticationMapping {
   toError = (error: Error): any => {
@@ -19,14 +19,13 @@ export class AuthenticationMapping {
         default:
           return new UnexpectedError()
       }
-    }else {
+    } else {
       throw new UnexpectedError()
     }
-    
   }
 
-  toUser = (json: Record<string, unknown>[]): User => {
-    const {usuario} = json as any
-    return User.fromJson(usuario)
+  toUser = (json: Record<string, unknown>[]): ParticipanteResponse => {
+    const { usuario } = json as any
+    return ParticipanteResponse.fromJson(usuario)
   }
 }

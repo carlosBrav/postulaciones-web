@@ -1,4 +1,4 @@
-import {User} from '@domain/authentication/models/user'
+import { ParticipanteResponse } from '@domain/authentication'
 export interface AuthenticationRepository {
-  login(user: string, pass: string): Promise<User>
+  login(idTipDoc: string, numDoc: string): Promise<ParticipanteResponse>
 }

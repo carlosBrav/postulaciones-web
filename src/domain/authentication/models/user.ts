@@ -1,4 +1,4 @@
-import { BaseModel } from '@domain/common/model/base-model'
+import { BaseModel } from '@domain/common/base-model/base-model'
 
 class User extends BaseModel {
   idUsuario: number = 0

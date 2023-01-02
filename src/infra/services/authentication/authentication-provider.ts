@@ -2,31 +2,28 @@ import {
   HttpClient,
   HttpMethod,
   HttpRequest,
-  HttpResponse
+  HttpResponse,
 } from '@core/http/http-client'
 
 import { AuthenticationProvider } from '@domain/authentication'
 
 export class AuthProvider implements AuthenticationProvider {
-  private readonly msName = '/authUsuario'
-  constructor(private _httpClient: HttpClient) {
-  }
+  private readonly msName = '/authParticipante'
+  constructor(private _httpClient: HttpClient) {}
 
   login(
-    user: string,
-    pass: string,
+    idTipDoc: string,
+    numDoc: string
   ): Promise<HttpResponse<Record<string, unknown>>> {
     const request: HttpRequest<Record<string, unknown>> = {
       url: `${this.msName}`,
       method: HttpMethod.POST,
       body: {
-        login: user,
-        clave: pass
+        idTipDoc,
+        numDoc,
       },
-      headers: this._httpClient.getPrivateHeader()
+      headers: this._httpClient.getPrivateHeader(),
     }
     return this._httpClient.request(request) as any
   }
-
-  
 }

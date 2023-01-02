@@ -1,7 +1,7 @@
-import { BaseModel } from '../../common/model/base-model'
+import { BaseModel } from '../../common/base-model/base-model'
 
 class UserRequest extends BaseModel {
-  usuario: string = ''
-  clave: string = ''
+  idTipDoc: string = ''
+  numDoc: string = ''
 }
 export { UserRequest }

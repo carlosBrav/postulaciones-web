@@ -1,48 +1,29 @@
 import { Box } from '@mui/material'
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import SelectComponent from '@presentation/components/select'
-import { useForm } from 'react-hook-form'
-import { yupResolver } from '@hookform/resolvers/yup'
-import { validationFormLogin } from '@presentation/pages/login/hooks/use-validation-form'
 import InputTextComponent from '@presentation/components/input-text'
 import ButtonComponent from '@presentation/components/button'
-import { useNavigate } from 'react-router-dom'
-import { PostulacionesContext } from '../context/postulaciones-context'
-import { tileLogin } from '@presentation/constants'
 import TextCommon from '@presentation/components/text-common'
+import { AuthenticationRepository } from '@domain/authentication'
+import { FullScreenLoader } from '@presentation/components/full-screen-loader/full-screen-loader'
+import { useFormLogin } from '@presentation/pages/login/hooks/use-form-login'
 
-const type_documents = [
-  { value: '0001', label: 'CARNET DE EXTRANJERIA' },
-  { value: '0002', label: 'DNI' },
-]
+type Props = {
+  auth: AuthenticationRepository
+}
 
-function Login() {
-  const navigate = useNavigate()
+function Login({ auth }: Props) {
   const {
+    listTypeDocs,
+    isLoadingAuth,
     control,
     handleSubmit,
-    getValues,
-    setValue,
-    formState: { errors },
-  } = useForm({
-    resolver: yupResolver(validationFormLogin),
-    defaultValues: {
-      document_type: '',
-      document_number: '',
-    },
-  })
-  const { setTitle } = useContext(PostulacionesContext)
-
-  const onSubmit = (data: any) => {
-    console.log('data ', data)
-    navigate('/evaluacion/home')
-  }
-
-  useEffect(() => {
-    setTitle(tileLogin)
-  }, [])
-
-  return (
+    onSubmit,
+    tileLogin,
+  } = useFormLogin(auth)
+  return isLoadingAuth ? (
+    <FullScreenLoader />
+  ) : (
     <Box width="100%" height="100%" display="flex" flexDirection="column">
       <Box
         width="100%"
@@ -65,17 +46,13 @@ function Login() {
         justifyContent="center"
         alignItems="center"
       >
-        <Box
-          width="100%"
-          padding="20px"
-          maxWidth="400px"
-        >
+        <Box width="100%" padding="20px" maxWidth="400px">
           <form style={{ flex: '1' }} onSubmit={handleSubmit(onSubmit)}>
             <Box marginBottom="30px">
               <SelectComponent
-                name="document_type"
+                name="idTipDoc"
                 control={control}
-                data={type_documents}
+                data={listTypeDocs}
                 idLabel="type_document_label"
                 idSelect="type_document_select"
                 label="Tipo de documento"
@@ -84,7 +61,7 @@ function Login() {
             <Box marginBottom="30px">
               <InputTextComponent
                 label="Documento"
-                name="document_number"
+                name="numDoc"
                 control={control}
                 id="number_document"
                 type="text"

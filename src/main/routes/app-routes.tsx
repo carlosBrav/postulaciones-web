@@ -6,17 +6,23 @@ import Home from '@presentation/pages/home'
 import { PostulacionesProvider } from '@presentation/pages/context/postulaciones-provider'
 import { Layout } from '@presentation/pages/layout'
 import { ParameterFactory } from '@main/factories/parameter-factory'
+import { AuthenticationFactory } from '@main/factories/login-factory'
 
 function AppRoutes() {
   const repositories = {
     parameter: ParameterFactory,
+    auth: AuthenticationFactory,
   }
   return (
     <Suspense fallback={<FullScreenLoader />}>
       <PostulacionesProvider parameterRepository={repositories.parameter}>
         <HashRouter>
           <Routes>
-            <Route index path="/evaluacion" element={<Login />} />
+            <Route
+              index
+              path="/evaluacion"
+              element={<Login auth={repositories.auth} />}
+            />
             <Route path="/evaluacion" element={<Layout />}>
               <Route path="home/*" element={<Home />} />
             </Route>
