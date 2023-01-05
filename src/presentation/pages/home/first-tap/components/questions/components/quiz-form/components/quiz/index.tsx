@@ -18,20 +18,11 @@ function QuizComponent({ id, title, index }: Props) {
   const { indicadores, setIndicadores } = useContext(PostulacionesContext)
 
   const handleChange = (event: Event, newValue: number | number[]) => {
-    // const selectResponse = response.find((val) => val.id === `${id}`)
-    // const indexResponse = response.indexOf(selectResponse as ResponseForm)
-    // const cloneResponse = cloneDeep(response)
-    // cloneResponse[indexResponse].value = `${newValue}`
-    // setResponse(cloneResponse)
-    console.log('id ', id)
-
     const selectIndicador = indicadores.find((val) => val.idIndicador === id)
-    console.log('selectIndicador ', selectIndicador)
     const indexIndicador = indicadores.indexOf(
       selectIndicador as EncuestaIndicador
     )
     const cloneIndicador = cloneDeep(indicadores)
-    console.log('clonde indicador ', cloneIndicador)
     cloneIndicador[indexIndicador].respuesta = newValue as number
     setIndicadores(cloneIndicador)
   }
@@ -49,6 +40,7 @@ function QuizComponent({ id, title, index }: Props) {
           defaultValue={0}
           getAriaValueText={valuetext}
           valueLabelDisplay="auto"
+          color="secondary"
           step={1}
           min={0}
           max={4}

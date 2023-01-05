@@ -104,24 +104,15 @@ function Home({ encuesta }: Props) {
   const { getQuantitys, isFinishStepsQuestions, stepsActual } =
     useHandleQuantityQuestions()
 
-  const { transformToResponseType } = useGenerateResponse()
-
   useEffect(() => {
     setTitle(titleHome)
   }, [])
 
-  console.log('participante ',participante)
   useEffect(()  =>  {
     if  (!participante)  {
       navigate('/evaluacion')
     }
   },  [participante])
-
-  // useEffect(() => {
-  //   if (questions.length > 0) {
-  //     setResponse(transformToResponseType(questions))
-  //   }
-  // }, [questions])
 
   const handleSteps = async () => {
     if (step === 1) {
