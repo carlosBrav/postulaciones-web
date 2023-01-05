@@ -5,23 +5,25 @@ import InputTextComponent from '@presentation/components/input-text'
 import ButtonComponent from '@presentation/components/button'
 import TextCommon from '@presentation/components/text-common'
 import { AuthenticationRepository } from '@domain/authentication'
+import { EncuestaRepository } from '@domain/encuesta'
 import { FullScreenLoader } from '@presentation/components/full-screen-loader/full-screen-loader'
 import { useFormLogin } from '@presentation/pages/login/hooks/use-form-login'
 
 type Props = {
   auth: AuthenticationRepository
+  encuesta: EncuestaRepository
 }
 
-function Login({ auth }: Props) {
+function Login({ auth, encuesta }: Props) {
   const {
     listTypeDocs,
-    isLoadingAuth,
+    isLoading,
     control,
     handleSubmit,
     onSubmit,
     tileLogin,
-  } = useFormLogin(auth)
-  return isLoadingAuth ? (
+  } = useFormLogin(auth, encuesta)
+  return isLoading ? (
     <FullScreenLoader />
   ) : (
     <Box width="100%" height="100%" display="flex" flexDirection="column">

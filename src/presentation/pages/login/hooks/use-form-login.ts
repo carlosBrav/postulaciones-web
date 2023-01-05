@@ -1,4 +1,8 @@
-import { AuthenticationRepository, UserRequest } from '@domain/authentication'
+import {
+  AuthenticationRepository,
+  ParticipanteResponse,
+  UserRequest,
+} from '@domain/authentication'
 import { useContext, useEffect } from 'react'
 import { tileLogin } from '@presentation/constants'
 import { PostulacionesContext } from '@presentation/pages/context/postulaciones-context'
@@ -7,12 +11,24 @@ import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { validationFormLogin } from '@presentation/pages/login/hooks/use-validation-form'
+import { useEncuestas } from '@main/adapters/encuesta/use-encuestas'
+import { EncuestaRepository, EncuestaResponse } from '@domain/encuesta'
 
-function useFormLogin(auth: AuthenticationRepository) {
+function useFormLogin(
+  auth: AuthenticationRepository,
+  encuesta: EncuestaRepository
+) {
   const { listTypeDocs } = useContext(PostulacionesContext)
+  const {
+    isLoading: isLoadingEncuestas,
+    isSuccess: isSuccessEncuesta,
+    data: encuestas,
+    mutate: mutateEncuesta,
+  } = useEncuestas(encuesta)
   const {
     isLoading: isLoadingAuth,
     isSuccess: isSuccessAuth,
+    data: dataAuth,
     mutate: mutateLogin,
   } = useLogin(auth)
   const navigate = useNavigate()
@@ -27,7 +43,9 @@ function useFormLogin(auth: AuthenticationRepository) {
       numDoc: '',
     },
   })
-  const { setTitle } = useContext(PostulacionesContext)
+  const { setTitle, setParticipante, setListEncuestas } =
+
+       useContext(PostulacionesContext)
 
   const onSubmit = (data: any) => {
     mutateLogin(UserRequest.fromJson({ ...data }))
@@ -35,16 +53,25 @@ function useFormLogin(auth: AuthenticationRepository) {
 
   useEffect(() => {
     if (isSuccessAuth) {
-      navigate('/evaluacion/home')
+      setParticipante(dataAuth as ParticipanteResponse)
+      //navigate('/evaluacion/home')
+      mutateEncuesta(`${dataAuth?.idProyecto as number}`)
     }
   }, [isSuccessAuth])
+
+  useEffect(()  =>  {
+    if  (isSuccessEncuesta)  {
+      setListEncuestas(encuestas as EncuestaResponse[])
+      navigate('/evaluacion/home')
+    }
+  },  [isSuccessEncuesta])
 
   useEffect(() => {
     setTitle(tileLogin)
   }, [])
 
   return {
-    isLoadingAuth,
+    isLoading: isLoadingAuth || isLoadingEncuestas,
     tileLogin,
     handleSubmit,
     onSubmit,

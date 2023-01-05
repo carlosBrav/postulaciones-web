@@ -7,11 +7,13 @@ import { PostulacionesProvider } from '@presentation/pages/context/postulaciones
 import { Layout } from '@presentation/pages/layout'
 import { ParameterFactory } from '@main/factories/parameter-factory'
 import { AuthenticationFactory } from '@main/factories/login-factory'
+import { EncuestaFactory } from '@main/factories/encuesta-factory'
 
 function AppRoutes() {
   const repositories = {
     parameter: ParameterFactory,
     auth: AuthenticationFactory,
+    encuesta: EncuestaFactory,
   }
   return (
     <Suspense fallback={<FullScreenLoader />}>
@@ -21,7 +23,12 @@ function AppRoutes() {
             <Route
               index
               path="/evaluacion"
-              element={<Login auth={repositories.auth} />}
+              element={
+                <Login
+                  auth={repositories.auth}
+                  encuesta={repositories.encuesta}
+                />
+              }
             />
             <Route path="/evaluacion" element={<Layout />}>
               <Route path="home/*" element={<Home />} />

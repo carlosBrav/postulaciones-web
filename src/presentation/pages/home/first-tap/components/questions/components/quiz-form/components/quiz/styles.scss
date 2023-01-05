@@ -13,7 +13,7 @@
     }
 
     @include respond-below(sm) {
-      max-width: 220px;
+      max-width: 200px;
       font-size: 10px !important;
     }
   }

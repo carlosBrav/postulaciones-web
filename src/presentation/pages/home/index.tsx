@@ -1,5 +1,5 @@
 import { Box } from '@mui/material'
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import TapHeader from '@presentation/pages/home/components/tap-header'
 import TextContent from '@presentation/pages/home/first-tap/components/text-content'
 import Questions from '@presentation/pages/home/first-tap/components/questions'
@@ -9,6 +9,8 @@ import { ButtonCustom } from '@presentation/components/button/buton-common'
 import { useHandleQuantityQuestions } from '@presentation/pages/home/first-tap/hooks/use-handle-quantity-questions'
 import { titleHome } from '@presentation/constants'
 import useGenerateResponse from '@presentation/pages/home/first-tap/hooks/use-generate-response'
+import { EncuestaSeccion } from '@domain/encuesta/models/encuesta-seccion'
+import { EncuestaIndicador } from '@domain/encuesta/models/encuesta-indicador'
 
 const questions = [
   { id: 1, title: 'Me1 esmero en buscar cosas que necesitan hacerse.' },
@@ -48,16 +50,13 @@ const questions = [
 ]
 
 function Home() {
+  const { listEncuestas } = useContext(PostulacionesContext)
   const { step, addStep, setTitle, setResponse, file } =
     useContext(PostulacionesContext)
   const { getQuantitys, isFinishStepsQuestions, stepsActual } =
     useHandleQuantityQuestions()
 
   const { transformToResponseType } = useGenerateResponse()
-
-  useEffect(() => {
-    getQuantitys(questions.length)
-  }, [])
 
   useEffect(() => {
     setTitle(titleHome)
@@ -75,12 +74,50 @@ function Home() {
     }
   }
 
+  const [secciones, setSecciones] = useState<EncuestaSeccion[]>([])
+  const [indicadores, setIndicadores] = useState<EncuestaIndicador[]>([])
+
+  useEffect(() => {
+    if (listEncuestas && listEncuestas.length > 0) {
+      setSecciones(
+        listEncuestas.filter((val) => val.dscTipo === 'Encuesta')[0]
+          ?.listSeccion as EncuestaSeccion[]
+      )
+    }
+  }, [listEncuestas])
+
+  useEffect(() => {
+    if (secciones && secciones.length > 0) {
+      secciones.forEach((data) => {
+        setIndicadores((indicadores) =>
+          indicadores.concat([...data.listIndicador])
+        )
+      })
+    }
+  }, [secciones])
+
+  useEffect(() => {
+    if (indicadores && indicadores.length) {
+      getQuantitys(indicadores.length)
+    }
+  }, [indicadores])
+
+  useEffect(() => {
+    if (indicadores && indicadores.length) {
+      setIndicadores(
+        indicadores.map((val, index) =>
+          EncuestaIndicador.fromJson({ ...val, index: index + 1 })
+        )
+      )
+    }
+  }, [indicadores])
+
   return (
     <Box width="100%">
       <TapHeader selected={step} />
       {step === 1 && stepsActual === 0 && <TextContent />}
       {step === 1 && stepsActual > 0 && (
-        <Questions questions={questions} step={stepsActual} />
+        <Questions questions={indicadores} step={stepsActual} />
       )}
       {step === 2 && <SecondTap />}
       <Box
@@ -91,11 +128,12 @@ function Home() {
         marginTop="30px"
       >
         <Box width="150px">
-          <ButtonCustom 
-          disabled={(step === 2 && file === null)}
-          title="Continuar" 
-          type="button" 
-          onClick={handleSteps} />
+          <ButtonCustom
+            disabled={step === 2 && file === null}
+            title="Continuar"
+            type="button"
+            onClick={handleSteps}
+          />
         </Box>
       </Box>
     </Box>
