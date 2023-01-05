@@ -3,10 +3,10 @@ import React from 'react'
 
 const ColorButton = styled(Button)<ButtonProps>(({ theme }) => ({
   textTransform: 'capitalize',
-  color: theme.palette.getContrastText('#572364'),
-  backgroundColor: '#572364',
+  color: theme.palette.getContrastText('#1A5EAF'),
+  backgroundColor: '#1A5EAF',
   '&:hover': {
-    backgroundColor: '#572364',
+    backgroundColor: '#1A5EAF',
   },
 }))
 

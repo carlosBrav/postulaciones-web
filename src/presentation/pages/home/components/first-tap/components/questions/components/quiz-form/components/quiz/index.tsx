@@ -40,7 +40,7 @@ function QuizComponent({ id, title, index }: Props) {
           defaultValue={0}
           getAriaValueText={valuetext}
           valueLabelDisplay="auto"
-          color="secondary"
+          color="primary"
           step={1}
           min={0}
           max={4}

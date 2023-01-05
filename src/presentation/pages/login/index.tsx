@@ -37,7 +37,7 @@ function Login({ auth, encuesta }: Props) {
         paddingLeft="20px"
         paddingBottom="15px"
         paddingTop="15px"
-        style={{ backgroundColor: '#572364' }}
+        style={{ backgroundColor: '#1A5EAF' }}
       >
         <TextCommon fontSize="20px" text={tileLogin} type="secondary" />
       </Box>

@@ -12,7 +12,7 @@ function LayoutHeader() {
       paddingLeft="20px"
       paddingTop="15px"
       paddingBottom="15px"
-      style={{ backgroundColor: '#572364' }}
+      style={{ backgroundColor: '#1A5EAF' }}
       display="flex"
       flexDirection="row"
       alignItems="center"

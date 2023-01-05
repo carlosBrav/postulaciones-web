@@ -77,7 +77,8 @@ function useHandleEncuesta(encuesta: EncuestaRepository) {
         idSections.forEach((section) => {
           const evalSec = new EncuestaEvalSec()
           evalSec.idSeccion = section
-          evalSec.factor = secciones[0].correccion
+          evalSec.factor = secciones.find((val) => val.idSeccion === section)
+            ?.correccion as number
           const evalSecInd: EncuestaEvalSecInd[] = indicadores
             .filter((val) => val.idSeccion === section)
             .map((indicador) =>

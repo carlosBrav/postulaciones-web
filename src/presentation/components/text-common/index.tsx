@@ -11,12 +11,17 @@ type Props = {
 const TextCommon = ({ text = '', fontSize = '', type = "primary" }: Props) => {
 
   const handleColor = () => {
-    switch(type){
-      case 'primary': return '#572364'
-      case 'secondary': return '#FFFFFF'
-      case 'dark': return '#262626'
-      case 'link': return '#1976d2'
-      default: return '#b1b1b1'
+    switch (type) {
+      case 'primary':
+        return '#1A5EAF'
+      case 'secondary':
+        return '#FFFFFF'
+      case 'dark':
+        return '#262626'
+      case 'link':
+        return '#1976d2'
+      default:
+        return '#b1b1b1'
     }
   }
 
