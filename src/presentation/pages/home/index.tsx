@@ -25,43 +25,44 @@ import { EncuestaEvalSecInd } from '@domain/encuesta/models/encuesta-evalsecind-
 import { TransformFile } from '@presentation/libs/file-convert'
 import { TextEntrevistaContent } from '@presentation/pages/home/thirth-tap/components/text-content'
 import { SuccessContent } from '@presentation/pages/home/thirth-tap/components/success-content'
+import { useNavigate } from 'react-router-dom'
 
-const questions = [
-  { id: 1, title: 'Me1 esmero en buscar cosas que necesitan hacerse.' },
-  {
-    id: 2,
-    title:
-      'Cuando me enfrentó a un problema difícil invierto mucho tiempo en encontrar una solución.',
-  },
-  { id: 3, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  {
-    id: 4,
-    title:
-      ' Cuando comienzo una tarea o un proyecto nuevo, recaudo toda la información posible antes de darle curso.',
-  },
-  { id: 5, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 6, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 7, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 8, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  {
-    id: 9,
-    title:
-      'mi rendimiento en el trabajo es mejor que el de otras personas con las que trabajo.',
-  },
-  { id: 10, title: 'Me esmero10 en buscar cosas que necesitan hacerse.' },
-  { id: 11, title: 'Me esmero11 en buscar cosas que necesitan hacerse.' },
-  { id: 12, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 13, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 14, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 15, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 16, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 17, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 18, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 19, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 20, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 21, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-  { id: 22, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
-]
+// const questions = [
+//   { id: 1, title: 'Me1 esmero en buscar cosas que necesitan hacerse.' },
+//   {
+//     id: 2,
+//     title:
+//       'Cuando me enfrentó a un problema difícil invierto mucho tiempo en encontrar una solución.',
+//   },
+//   { id: 3, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   {
+//     id: 4,
+//     title:
+//       ' Cuando comienzo una tarea o un proyecto nuevo, recaudo toda la información posible antes de darle curso.',
+//   },
+//   { id: 5, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 6, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 7, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 8, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   {
+//     id: 9,
+//     title:
+//       'mi rendimiento en el trabajo es mejor que el de otras personas con las que trabajo.',
+//   },
+//   { id: 10, title: 'Me esmero10 en buscar cosas que necesitan hacerse.' },
+//   { id: 11, title: 'Me esmero11 en buscar cosas que necesitan hacerse.' },
+//   { id: 12, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 13, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 14, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 15, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 16, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 17, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 18, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 19, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 20, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 21, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+//   { id: 22, title: 'Me esmero en buscar cosas que necesitan hacerse.' },
+// ]
 
 type Props = {
   encuesta: EncuestaRepository
@@ -86,6 +87,8 @@ function Home({ encuesta }: Props) {
     setStepsEntrevista,
   } = useContext(PostulacionesContext)
 
+  const navigate = useNavigate()
+
   const {
     isLoading: isLoadingCreateEncuesta,
     isSuccess: isSuccessCeateEncuesta,
@@ -107,11 +110,18 @@ function Home({ encuesta }: Props) {
     setTitle(titleHome)
   }, [])
 
-  useEffect(() => {
-    if (questions.length > 0) {
-      setResponse(transformToResponseType(questions))
+  console.log('participante ',participante)
+  useEffect(()  =>  {
+    if  (!participante)  {
+      navigate('/evaluacion')
     }
-  }, [questions])
+  },  [participante])
+
+  // useEffect(() => {
+  //   if (questions.length > 0) {
+  //     setResponse(transformToResponseType(questions))
+  //   }
+  // }, [questions])
 
   const handleSteps = async () => {
     if (step === 1) {
