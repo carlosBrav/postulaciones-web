@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import {quantityQuestionsPerPage} from '@presentation/pages/home/first-tap/constants'
+import { quantityQuestionsPerPage } from '@presentation/pages/home/components/first-tap/constants'
 
 function useHandleQuantityQuestions() {
   const [stepsQuestion, setStepsQuestion] = useState<number>(0)

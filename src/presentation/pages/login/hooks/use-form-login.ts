@@ -29,6 +29,7 @@ function useFormLogin(
     isLoading: isLoadingAuth,
     isSuccess: isSuccessAuth,
     data: dataAuth,
+    error,
     mutate: mutateLogin,
   } = useLogin(auth)
   const navigate = useNavigate()
@@ -76,6 +77,7 @@ function useFormLogin(
     onSubmit,
     control,
     listTypeDocs,
+    error: error as string,
   }
 }
 

@@ -1,7 +1,7 @@
 import { Box } from '@mui/material'
 import React from 'react'
-import QuizForm from '@presentation/pages/home/first-tap/components/questions/components/quiz-form'
-import { quantityQuestionsPerPage } from '@presentation/pages/home/first-tap/constants'
+import QuizForm from '@presentation/pages/home/components/first-tap/components/questions/components/quiz-form'
+import { quantityQuestionsPerPage } from '@presentation/pages/home/components/first-tap/constants'
 import './styles.scss'
 import { EncuestaIndicador } from '@domain/encuesta/models/encuesta-indicador'
 

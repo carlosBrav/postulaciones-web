@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, FormHelperText } from '@mui/material'
 import React from 'react'
 import SelectComponent from '@presentation/components/select'
 import InputTextComponent from '@presentation/components/input-text'
@@ -22,6 +22,7 @@ function Login({ auth, encuesta }: Props) {
     handleSubmit,
     onSubmit,
     tileLogin,
+    error,
   } = useFormLogin(auth, encuesta)
   return isLoading ? (
     <FullScreenLoader />
@@ -80,6 +81,20 @@ function Login({ auth, encuesta }: Props) {
               </Box>
             </Box>
           </form>
+          {error && (
+            <Box width="100%" marginTop="20px">
+              <Box
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <FormHelperText style={{ fontSize: 15 }} error>
+                  {error}
+                </FormHelperText>
+              </Box>
+            </Box>
+          )}
         </Box>
       </Box>
     </Box>
