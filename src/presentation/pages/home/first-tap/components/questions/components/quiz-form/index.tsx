@@ -18,7 +18,8 @@ function QuizForm({sub_questions}: Props) {
         {sub_questions.map((data: EncuestaIndicador, index: number) => (
           <QuizComponent
             key={data.idIndicador}
-            id={data.index}
+            id={data.idIndicador}
+            index={data.index}
             title={data.descripcion}
           />
         ))}

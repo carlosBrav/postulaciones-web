@@ -1,17 +1,21 @@
-import { Box, List, ListItemText } from '@mui/material';
+import { Box, List, ListItemText } from '@mui/material'
 import TextComponent from '@presentation/components/text-common'
-import {ButtonCustom} from '@presentation/components/button/buton-common'
-import React from 'react';
+import { ButtonCustom } from '@presentation/components/button/buton-common'
+import React from 'react'
 
 type Props = {
   textHtml: string
 }
 
-function TextContent({textHtml}: Props) {
+function TextVideoContent({ textHtml }: Props) {
   return (
     <Box width="100%" paddingRight="10px" marginTop="20px" textAlign="justify">
-      <Box paddingLeft="30px" paddingRight="5px" dangerouslySetInnerHTML={{__html: textHtml}}>
-      {/* <List dense={false}>
+      <Box
+        paddingLeft="30px"
+        paddingRight="5px"
+        dangerouslySetInnerHTML={{ __html: textHtml }}
+      >
+        {/* <List dense={false}>
         <ListItemText primary={<TextComponent type="dark" fontSize="14px" text="1. Este cuestionario consta de 55 declaraiones breves. Lee cuidadosamente cada declaración y decide cuál te descibe de forma más acertada. Sé honesto contigo mismo."/>}/>
         <ListItemText style={{marginTop:'10px'}} primary={<TextComponent type="dark" fontSize="14px" text="Recuerda que nadie hace todo bien, ni siquiera es algo deseable saber hacer de todo."/>}/>
         <ListItemText style={{marginTop:'10px'}} primary={<TextComponent type="dark" fontSize="14px" text="2. Seleciona el número que corresponda para designar la medida en que la declaóacion te representa:"/>}/>
@@ -33,10 +37,8 @@ function TextContent({textHtml}: Props) {
         <ListItemText style={{marginTop:'10px'}} primary={<TextComponent type="dark" fontSize="14px" text="5. Por favor designa una clasióicacion numérica para todas las declaraciones."/>}/>
       </List> */}
       </Box>
-      
-      
     </Box>
-  );
+  )
 }
 
-export default TextContent;
+export { TextVideoContent }

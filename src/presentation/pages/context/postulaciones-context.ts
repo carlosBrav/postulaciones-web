@@ -3,6 +3,7 @@ import { ResponseForm } from '@domain/response/model/response-form'
 import {Selector} from '@domain/common/selector'
 import { ParticipanteResponse } from '@domain/authentication'
 import { EncuestaResponse } from "@domain/encuesta";
+import { EncuestaIndicador } from '@domain/encuesta/models/encuesta-indicador'
 
 export type PostulacionesStateType = {
   step: number
@@ -11,6 +12,12 @@ export type PostulacionesStateType = {
   file: File | null
   listTypeDocs: Selector[]
   listEncuestas: EncuestaResponse[]
+  idSections: number[]
+  stepsSpitch: number
+  stepsEntrevista: number
+  setStepsEntrevista: (data: number) => void
+  setStepsSpitch: (data: number) => void
+  setIdSections: (data: number[]) => void
   setListEncuestas: (data: EncuestaResponse[]) => void
   setTitle: (title: string) => void
   addStep: () => void
@@ -19,6 +26,8 @@ export type PostulacionesStateType = {
   setFile: (file: File | null) => void
   participante: ParticipanteResponse | null
   setParticipante: (data: ParticipanteResponse) => void
+  indicadores: EncuestaIndicador[]
+  setIndicadores: (data: EncuestaIndicador[]) => void
 }
 
 export const defaultState = {
@@ -29,6 +38,14 @@ export const defaultState = {
   listTypeDocs: [],
   participante: null,
   listEncuestas: [],
+  indicadores: [],
+  idSections: [],
+  stepsSpitch: 0,
+  stepsEntrevista: 0,
+  setStepsEntrevista: () => {},
+  setStepsSpitch: () => {},
+  setIdSections: () => {},
+  setIndicadores: () => {},
   setListEncuestas: () => {},
   setTitle: () => {},
   addStep: () => {},
@@ -36,7 +53,6 @@ export const defaultState = {
   setResponse: () => {},
   setFile: () => {},
   setParticipante: () => {},
-  
 }
 
 export const PostulacionesContext =

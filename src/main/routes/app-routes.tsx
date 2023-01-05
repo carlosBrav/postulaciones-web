@@ -31,7 +31,10 @@ function AppRoutes() {
               }
             />
             <Route path="/evaluacion" element={<Layout />}>
-              <Route path="home/*" element={<Home />} />
+              <Route
+                path="home/*"
+                element={<Home encuesta={repositories.encuesta} />}
+              />
             </Route>
             <Route path="*" element={<Navigate to="/evaluacion" replace />} />
           </Routes>

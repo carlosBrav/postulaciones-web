@@ -44,8 +44,7 @@ function useFormLogin(
     },
   })
   const { setTitle, setParticipante, setListEncuestas } =
-
-       useContext(PostulacionesContext)
+    useContext(PostulacionesContext)
 
   const onSubmit = (data: any) => {
     mutateLogin(UserRequest.fromJson({ ...data }))
@@ -59,12 +58,12 @@ function useFormLogin(
     }
   }, [isSuccessAuth])
 
-  useEffect(()  =>  {
-    if  (isSuccessEncuesta)  {
+  useEffect(() => {
+    if (isSuccessEncuesta) {
       setListEncuestas(encuestas as EncuestaResponse[])
       navigate('/evaluacion/home')
     }
-  },  [isSuccessEncuesta])
+  }, [isSuccessEncuesta])
 
   useEffect(() => {
     setTitle(tileLogin)

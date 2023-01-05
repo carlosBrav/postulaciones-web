@@ -26,7 +26,7 @@ export default function DragDropFiles({
   maxFiles = 1,
   filterExtensions = import.meta.env.VITE_APP_FILE_EXTENSIONS_ALLOWED,
   maxSize = 2000000,
-  msjTypeArchive = 'MP4 (max. 2MB)'
+  msjTypeArchive = 'MP4 o MPEG (max. 2MB)',
 }: Props) {
   const onDrop = (acceptedFiles: any) => {
     if (onChange) onChange(acceptedFiles)
@@ -36,10 +36,10 @@ export default function DragDropFiles({
     useDropzone({
       onDrop,
       accept: {
-        'file/*': extensionsAllowed
+        'file/*': extensionsAllowed,
       },
       maxSize,
-      maxFiles
+      maxFiles,
     })
   const classes = cn('drop-zone')
   return (
