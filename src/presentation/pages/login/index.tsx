@@ -1,7 +1,7 @@
 import { Box, FormHelperText } from '@mui/material'
 import React from 'react'
 import SelectComponent from '@presentation/components/select'
-import InputTextComponent from '@presentation/components/input-text'
+import InputNumericComponent from '@presentation/components/input-text/numeric'
 import ButtonComponent from '@presentation/components/button'
 import TextCommon from '@presentation/components/text-common'
 import { AuthenticationRepository } from '@domain/authentication'
@@ -25,6 +25,8 @@ function Login({ auth, encuesta }: Props) {
     error,
     errors,
     maxLength,
+    handleDocument,
+    numDoc,
   } = useFormLogin(auth, encuesta)
   return isLoading ? (
     <FullScreenLoader />
@@ -66,10 +68,12 @@ function Login({ auth, encuesta }: Props) {
               />
             </Box>
             <Box marginBottom="30px">
-              <InputTextComponent
-                label="Documento"
-                name="numDoc"
+              <InputNumericComponent
                 control={control}
+                name="numDoc"
+                label="Documento"
+                onChange={handleDocument}
+                value={numDoc}
                 id="number_document"
                 type="text"
                 maxLength={maxLength}

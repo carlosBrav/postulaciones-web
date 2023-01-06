@@ -50,13 +50,18 @@ function useFormLogin(
 
   const [maxLength, setMaxLength] = useState<number>(8)
 
-  const { idTipDoc } = watch()
+  const { idTipDoc, numDoc } = watch()
 
   const { setTitle, setParticipante, setListEncuestas } =
     useContext(PostulacionesContext)
 
   const onSubmit = (data: any) => {
     mutateLogin(UserRequest.fromJson({ ...data }))
+  }
+
+  const handleDocument = (data: string) => {
+    setValue('numDoc', data)
+    clearErrors('numDoc')
   }
 
   useEffect(() => {
@@ -98,6 +103,8 @@ function useFormLogin(
     tileLogin,
     handleSubmit,
     onSubmit,
+    handleDocument,
+    numDoc,
     maxLength,
     errors,
     control,
