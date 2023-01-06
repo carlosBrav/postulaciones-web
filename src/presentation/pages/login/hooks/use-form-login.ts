@@ -3,7 +3,7 @@ import {
   ParticipanteResponse,
   UserRequest,
 } from '@domain/authentication'
-import { useContext, useEffect } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { tileLogin } from '@presentation/constants'
 import { PostulacionesContext } from '@presentation/pages/context/postulaciones-context'
 import { useLogin } from '@main/adapters/authentication/use-login'
@@ -37,6 +37,9 @@ function useFormLogin(
     control,
     handleSubmit,
     formState: { errors },
+    watch,
+    setValue,
+    clearErrors,
   } = useForm({
     resolver: yupResolver(validationFormLogin),
     defaultValues: {
@@ -44,6 +47,11 @@ function useFormLogin(
       numDoc: '',
     },
   })
+
+  const [maxLength, setMaxLength] = useState<number>(8)
+
+  const { idTipDoc } = watch()
+
   const { setTitle, setParticipante, setListEncuestas } =
     useContext(PostulacionesContext)
 
@@ -67,6 +75,21 @@ function useFormLogin(
   }, [isSuccessEncuesta])
 
   useEffect(() => {
+    if (idTipDoc !== '') {
+      setValue('numDoc', '')
+      //clearErrors('numDoc')
+    }
+  }, [idTipDoc])
+
+  useEffect(() => {
+    if (idTipDoc !== '00001') {
+      setMaxLength(12)
+    } else {
+      setMaxLength(8)
+    }
+  }, [idTipDoc])
+
+  useEffect(() => {
     setTitle(tileLogin)
   }, [])
 
@@ -75,6 +98,8 @@ function useFormLogin(
     tileLogin,
     handleSubmit,
     onSubmit,
+    maxLength,
+    errors,
     control,
     listTypeDocs,
     error: error as string,

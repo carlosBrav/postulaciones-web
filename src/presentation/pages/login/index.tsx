@@ -23,6 +23,8 @@ function Login({ auth, encuesta }: Props) {
     onSubmit,
     tileLogin,
     error,
+    errors,
+    maxLength,
   } = useFormLogin(auth, encuesta)
   return isLoading ? (
     <FullScreenLoader />
@@ -59,6 +61,8 @@ function Login({ auth, encuesta }: Props) {
                 idLabel="type_document_label"
                 idSelect="type_document_select"
                 label="Tipo de documento"
+                error={!!errors.idTipDoc}
+                helperText={errors.idTipDoc?.message as string}
               />
             </Box>
             <Box marginBottom="30px">
@@ -68,6 +72,8 @@ function Login({ auth, encuesta }: Props) {
                 control={control}
                 id="number_document"
                 type="text"
+                maxLength={maxLength}
+                helperText={errors.numDoc?.message as string}
               />
             </Box>
             <Box

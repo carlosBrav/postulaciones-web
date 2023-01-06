@@ -39,10 +39,9 @@ export default function SelectComponent({
       control={control}
       render={({ field }) => (
         <FormControl fullWidth error={error}>
-           <InputLabel id={idLabel}>
-            {label}
-          </InputLabel>
+          <InputLabel id={idLabel}>{label}</InputLabel>
           <Select
+            error={error}
             label={label}
             id={idSelect}
             multiple={multiple}
@@ -56,7 +55,7 @@ export default function SelectComponent({
             ))}
           </Select>
 
-          <FormHelperText>{helperText}</FormHelperText>
+          {helperText && <FormHelperText error>{helperText}</FormHelperText>}
         </FormControl>
       )}
     />
