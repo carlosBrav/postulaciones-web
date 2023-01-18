@@ -15,6 +15,7 @@ import { EncuestaSeccion } from '@domain/encuesta/models/encuesta-seccion'
 import { TransformFile } from '@presentation/libs/file-convert'
 import { EncuestaIndicador } from '@domain/encuesta/models/encuesta-indicador'
 import { useHandleIntegrations } from '@presentation/pages/home/hooks/use-handle-integrations'
+import orderBy from 'lodash/orderBy'
 
 function useHandleEncuesta(encuesta: EncuestaRepository) {
   const {
@@ -152,15 +153,28 @@ function useHandleEncuesta(encuesta: EncuestaRepository) {
           const newEncuestaIndicador = EncuestaIndicador.fromJson({
             ...val,
           }) as EncuestaIndicador
-          newEncuestaIndicador.index = contador
-          newEncuestaIndicador.respuesta = 0
+          // newEncuestaIndicador.index = contador
+          // newEncuestaIndicador.respuesta = 0
           listIndicadores.push(newEncuestaIndicador)
-          contador++
+          //contador++
         })
       })
+      const listIndicadoresOrdenado = orderBy(
+        listIndicadores,
+        'orden',
+        'asc'
+      ).map((val, index) => {
+        return EncuestaIndicador.fromJson({
+          ...val,
+          respuesta: 0,
+          index: index + 1,
+        })
+      }) as EncuestaIndicador[]
+      setIndicadores(listIndicadoresOrdenado)
+      setIdSections([
+        ...new Set(listIndicadoresOrdenado.map((val) => val.idSeccion)),
+      ])
     }
-    setIndicadores(listIndicadores)
-    setIdSections([...new Set(listIndicadores.map((val) => val.idSeccion))])
   }, [secciones])
 
   useEffect(() => {
