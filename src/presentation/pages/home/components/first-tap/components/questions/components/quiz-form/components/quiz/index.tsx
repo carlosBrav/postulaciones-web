@@ -25,6 +25,7 @@ function QuizComponent({ id, title, index }: Props) {
     const cloneIndicador = cloneDeep(indicadores)
     cloneIndicador[indexIndicador].respuesta = newValue as number
     setIndicadores(cloneIndicador)
+    console.log('cloneIndicador ', cloneIndicador)
   }
 
   return (
@@ -37,13 +38,13 @@ function QuizComponent({ id, title, index }: Props) {
       <Box width="100px">
         <Slider
           onChange={handleChange}
-          defaultValue={0}
+          defaultValue={1}
           getAriaValueText={valuetext}
           valueLabelDisplay="auto"
           color="primary"
           step={1}
-          min={0}
-          max={4}
+          min={1}
+          max={5}
         />
       </Box>
     </div>

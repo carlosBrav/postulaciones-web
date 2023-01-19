@@ -146,17 +146,13 @@ function useHandleEncuesta(encuesta: EncuestaRepository) {
 
   useEffect(() => {
     let listIndicadores: EncuestaIndicador[] = []
-    let contador = 1
     if (secciones && secciones.length > 0) {
       secciones.forEach((data) => {
         data.listIndicador.forEach((val) => {
           const newEncuestaIndicador = EncuestaIndicador.fromJson({
             ...val,
           }) as EncuestaIndicador
-          // newEncuestaIndicador.index = contador
-          // newEncuestaIndicador.respuesta = 0
           listIndicadores.push(newEncuestaIndicador)
-          //contador++
         })
       })
       const listIndicadoresOrdenado = orderBy(
@@ -166,7 +162,7 @@ function useHandleEncuesta(encuesta: EncuestaRepository) {
       ).map((val, index) => {
         return EncuestaIndicador.fromJson({
           ...val,
-          respuesta: 0,
+          respuesta: 1,
           index: index + 1,
         })
       }) as EncuestaIndicador[]

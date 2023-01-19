@@ -7,7 +7,7 @@ class EncuestaIndicador extends BaseModel {
   orden: number = 0
   dscSeccion: string = ''
   index: number = 0
-  respuesta: number = 0
+  respuesta: number = 1
 }
 
 export { EncuestaIndicador }

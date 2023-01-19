@@ -3,10 +3,6 @@ import TextCommon from '@presentation/components/text-common'
 import './styles.scss'
 const marks = [
   {
-      value: 0,
-      label: '0',
-  },
-  {
       value: 1,
       label: '1',
   },
@@ -21,6 +17,10 @@ const marks = [
   {
       value: 4,
       label: '4',
+  },
+  {
+      value: 5,
+      label: '5',
   },
 ]
 
